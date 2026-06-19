@@ -87,7 +87,7 @@ export const products: Product[] = [
     tagline: "Mobilité urbaine à la demande",
     description:
       "Application de transport et mobilité urbaine connectant passagers et conducteurs. Réservation rapide, suivi en temps réel et paiement intégré.",
-    url: "https://tabisride.vercel.app",
+    url: "https://tibusride.lovable.app",
     category: "Transport & Mobilité",
     features: [
       "Courses à la demande",
