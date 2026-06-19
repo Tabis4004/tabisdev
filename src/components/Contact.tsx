@@ -19,10 +19,10 @@ export function Contact() {
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
-                href="mailto:tabisdev@gmail.com"
+                href="mailto:tabiscompany@gmail.com"
                 className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#0B1120] transition-colors hover:bg-slate-100"
               >
-                tabisdev@gmail.com
+                tabiscompany@gmail.com
               </a>
               <a
                 href="https://tibus.app"

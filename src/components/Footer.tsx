@@ -42,10 +42,10 @@ export function Footer() {
           <div>
             <p className="mb-3 text-sm font-semibold text-white">Contact</p>
             <a
-              href="mailto:tabisdev@gmail.com"
+              href="mailto:tabiscompany@gmail.com"
               className="text-sm text-slate-500 transition-colors hover:text-slate-300"
             >
-              tabisdev@gmail.com
+              tabiscompany@gmail.com
             </a>
             <p className="mt-2 text-sm text-slate-500">tabisdev.com</p>
           </div>
