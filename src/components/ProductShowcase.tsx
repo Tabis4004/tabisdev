@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Product } from "@/data/portfolio";
 import {
   IconBus,
@@ -28,14 +27,14 @@ export function ProductShowcase({
 
   return (
     <article
-      className="relative overflow-hidden rounded-3xl border border-white/10"
+      className="relative overflow-hidden rounded-3xl border border-white/80 bg-white shadow-xl shadow-slate-200/60"
       style={{
-        background: `linear-gradient(135deg, ${product.accent}18 0%, #151D2E 40%, #0B1120 100%)`,
+        background: `linear-gradient(135deg, white 0%, ${product.accentLight} 100%)`,
       }}
     >
       <div
         className={`pointer-events-none absolute -top-24 h-64 w-64 rounded-full blur-3xl ${reversed ? "-left-24" : "-right-24"}`}
-        style={{ backgroundColor: `${product.accent}40` }}
+        style={{ backgroundColor: `${product.accent}30` }}
       />
 
       <div
@@ -50,27 +49,27 @@ export function ProductShowcase({
               style={{
                 backgroundColor: product.accent,
                 color: "#fff",
-                boxShadow: `0 8px 32px ${product.accent}55`,
+                boxShadow: `0 8px 24px ${product.accent}44`,
               }}
             >
               <Icon className="h-7 w-7" />
             </div>
             <span
               className="rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider"
-              style={{ backgroundColor: `${product.accent}25`, color: product.accent }}
+              style={{ backgroundColor: `${product.accent}18`, color: product.accent }}
             >
               {product.category}
             </span>
           </div>
 
-          <h3 className="text-3xl font-bold text-white md:text-4xl">{product.name}</h3>
+          <h3 className="text-3xl font-bold text-slate-900 md:text-4xl">{product.name}</h3>
           <p
             className="mt-2 text-lg font-semibold"
             style={{ color: product.accent }}
           >
             {product.tagline}
           </p>
-          <p className="mt-4 text-base leading-relaxed text-slate-300">
+          <p className="mt-4 text-base leading-relaxed text-slate-600">
             {product.description}
           </p>
 
@@ -78,8 +77,11 @@ export function ProductShowcase({
             {product.features.map((feature) => (
               <span
                 key={feature}
-                className="rounded-full px-3 py-1.5 text-sm font-medium text-white"
-                style={{ backgroundColor: `${product.accent}30` }}
+                className="rounded-full px-3 py-1.5 text-sm font-medium"
+                style={{
+                  backgroundColor: `${product.accent}15`,
+                  color: product.accent,
+                }}
               >
                 {feature}
               </span>
@@ -93,7 +95,7 @@ export function ProductShowcase({
             className="mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
             style={{
               background: `linear-gradient(135deg, ${product.accent}, ${product.accent}cc)`,
-              boxShadow: `0 8px 24px ${product.accent}44`,
+              boxShadow: `0 8px 20px ${product.accent}33`,
             }}
           >
             Visiter {hostname}

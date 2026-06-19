@@ -45,7 +45,7 @@ export function ScreenshotGallery({
             onClick={() => setActive(index)}
             className="group relative overflow-hidden rounded-xl border-2 transition-all duration-200"
             style={{
-              borderColor: active === index ? accent : "rgba(255,255,255,0.1)",
+              borderColor: active === index ? accent : "rgba(148,163,184,0.35)",
               boxShadow: active === index ? `0 0 0 3px ${accent}33` : "none",
             }}
             aria-label={`${productName} — capture ${index + 1}`}

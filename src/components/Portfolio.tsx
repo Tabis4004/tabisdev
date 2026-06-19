@@ -3,20 +3,20 @@ import { ProductShowcase } from "./ProductShowcase";
 
 export function Portfolio() {
   return (
-    <section id="portfolio" className="py-20 md:py-28">
+    <section id="portfolio" className="bg-white/60 py-20 backdrop-blur-sm md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-14 text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-pink-400">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-violet-600">
             Portfolio
           </p>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-5xl">
             Nos{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-violet-400 to-emerald-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-violet-600 to-emerald-600 bg-clip-text text-transparent">
               produits
             </span>{" "}
             en action
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
             Découvrez les interfaces de chaque application — transport, gestion
             commerciale et paiements mobiles.
           </p>
