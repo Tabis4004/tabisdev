@@ -48,6 +48,18 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 
 Aucune variable d'environnement requise pour l'instant.
 
+## Éditer le contenu du site
+
+Tout le texte (email, titres, produits, liens…) est dans **`content/site.json`**.
+
+- **Interface web** : [EDITING.md](./EDITING.md) — `/admin` avec Decap CMS
+- **Rapide** : modifier `content/site.json` sur GitHub → Vercel redéploie automatiquement
+
+```bash
+npm run dev   # site
+npm run cms   # éditeur local → http://localhost:3000/admin
+```
+
 ## Captures d'écran
 
 Les screenshots sont dans `public/screenshots/`. Pour les régénérer :

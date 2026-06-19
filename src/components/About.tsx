@@ -1,28 +1,9 @@
-const values = [
-  {
-    title: "Impact local",
-    color: "#10B981",
-    bg: "#ECFDF5",
-    description:
-      "Nos solutions répondent aux réalités du terrain : mobile money, connectivité variable, besoins des PME africaines.",
-  },
-  {
-    title: "Technologie moderne",
-    color: "#3B82F6",
-    bg: "#EFF6FF",
-    description:
-      "Applications web et mobiles performantes, architectures cloud scalables et interfaces pensées pour l'utilisateur.",
-  },
-  {
-    title: "Écosystème intégré",
-    color: "#8B5CF6",
-    bg: "#F5F3FF",
-    description:
-      "Nos produits se complètent : transport, gestion commerciale et paiement forment un écosystème cohérent Tabis.",
-  },
-];
+import { getAboutValues, getSiteContent } from "@/lib/content";
 
 export function About() {
+  const { about } = getSiteContent();
+  const values = getAboutValues();
+
   return (
     <section id="about" className="border-y border-slate-200/80 bg-gradient-to-br from-sky-50 via-white to-violet-50 py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
@@ -32,14 +13,10 @@ export function About() {
               À propos
             </p>
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-              Tabis Dev, votre partenaire numérique
+              {about.title}
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
-              Nous sommes une société de développement logiciel spécialisée dans
-              la création de solutions numériques pour l&apos;Afrique de
-              l&apos;Ouest. De la billetterie de bus à la gestion commerciale
-              en passant par les paiements mobiles, nous accompagnons entreprises
-              et voyageurs dans leur transformation digitale.
+              {about.description}
             </p>
           </div>
 

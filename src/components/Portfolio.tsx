@@ -1,7 +1,10 @@
-import { products } from "@/data/portfolio";
+import { getProducts, getSiteContent } from "@/lib/content";
 import { ProductShowcase } from "./ProductShowcase";
 
 export function Portfolio() {
+  const { portfolio } = getSiteContent();
+  const products = getProducts();
+
   return (
     <section id="portfolio" className="bg-white/60 py-20 backdrop-blur-sm md:py-28">
       <div className="mx-auto max-w-6xl px-6">
@@ -10,22 +13,21 @@ export function Portfolio() {
             Portfolio
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-5xl">
-            Nos{" "}
+            {portfolio.titleBefore}{" "}
             <span className="bg-gradient-to-r from-blue-600 via-violet-600 to-emerald-600 bg-clip-text text-transparent">
-              produits
+              {portfolio.titleHighlight}
             </span>{" "}
-            en action
+            {portfolio.titleAfter}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-            Découvrez les interfaces de chaque application — transport, gestion
-            commerciale et paiements mobiles.
+            {portfolio.subtitle}
           </p>
         </div>
 
         <div className="space-y-10">
           {products.map((product, index) => (
             <ProductShowcase
-              key={product.name}
+              key={product.id}
               product={product}
               reversed={index % 2 === 1}
             />

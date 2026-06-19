@@ -1,0 +1,105 @@
+{
+  "email": "tabiscompany@gmail.com",
+  "domain": "tabisdev.com",
+  "footerTagline": "Solutions numériques pour l'Afrique de l'Ouest.",
+  "hero": {
+    "badge": "Solutions numériques made in Africa",
+    "titleBefore": "Nous construisons les",
+    "titleHighlight": "applications",
+    "titleAfter": "qui transforment l'Afrique de l'Ouest",
+    "subtitle": "Tabis Dev conçoit et déploie des plateformes de transport, de gestion commerciale et de paiement mobile — des outils concrets pour les entreprises et les citoyens.",
+    "stats": [
+      { "value": "4+", "label": "Produits actifs" },
+      { "value": "5K+", "label": "Utilisateurs" },
+      { "value": "20+", "label": "Villes connectées" }
+    ]
+  },
+  "portfolio": {
+    "titleBefore": "Nos",
+    "titleHighlight": "produits",
+    "titleAfter": "en action",
+    "subtitle": "Découvrez les interfaces de chaque application — transport, gestion commerciale et paiements mobiles."
+  },
+  "about": {
+    "title": "Tabis Dev, votre partenaire numérique",
+    "description": "Nous sommes une société de développement logiciel spécialisée dans la création de solutions numériques pour l'Afrique de l'Ouest. De la billetterie de bus à la gestion commerciale en passant par les paiements mobiles, nous accompagnons entreprises et voyageurs dans leur transformation digitale.",
+    "values": [
+      {
+        "title": "Impact local",
+        "description": "Nos solutions répondent aux réalités du terrain : mobile money, connectivité variable, besoins des PME africaines."
+      },
+      {
+        "title": "Technologie moderne",
+        "description": "Applications web et mobiles performantes, architectures cloud scalables et interfaces pensées pour l'utilisateur."
+      },
+      {
+        "title": "Écosystème intégré",
+        "description": "Nos produits se complètent : transport, gestion commerciale et paiement forment un écosystème cohérent Tabis."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Un projet en tête ?",
+    "description": "Que vous souhaitiez intégrer nos solutions ou développer un nouveau produit, notre équipe est à votre écoute.",
+    "ctaLabel": "Découvrir Tibus",
+    "ctaUrl": "https://tibus.app"
+  },
+  "products": [
+    {
+      "id": "tibus",
+      "name": "Tibus",
+      "tagline": "Voyager par bus devient facile",
+      "description": "Plateforme de réservation de billets de bus en Afrique de l'Ouest. Recherche de trajets, comparaison des prix, paiement mobile money et billets numériques avec QR code.",
+      "url": "https://tibus.app",
+      "category": "Transport & Mobilité",
+      "features": [
+        "Réservation en ligne 24/7",
+        "Paiement mobile money sécurisé",
+        "Billets digitaux avec QR code",
+        "Dashboard pour compagnies de bus"
+      ]
+    },
+    {
+      "id": "gestabiscom",
+      "name": "Gestabiscom",
+      "tagline": "Gérez votre activité commerciale",
+      "description": "Solution complète de gestion commerciale et terrain : installations, abonnements, équipes, stocks et reporting en temps réel pour les entreprises en croissance.",
+      "url": "https://gestabiscom.cervel.app",
+      "category": "Gestion & ERP",
+      "features": [
+        "Suivi des installations terrain",
+        "Gestion des abonnements clients",
+        "Tableaux de bord analytiques",
+        "Multi-tenant & multi-sites"
+      ]
+    },
+    {
+      "id": "tabispay",
+      "name": "TabisPay",
+      "tagline": "Paiements simplifiés",
+      "description": "Infrastructure de paiement mobile pour encaisser, suivre et réconcilier les transactions. Conçue pour s'intégrer aux écosystèmes Tabis et aux besoins locaux.",
+      "url": "https://tabispay.cervel.app",
+      "category": "Fintech",
+      "features": [
+        "Encaissement mobile money",
+        "Suivi des transactions",
+        "Réconciliation automatique",
+        "API d'intégration"
+      ]
+    },
+    {
+      "id": "tabisride",
+      "name": "TabisRide",
+      "tagline": "Mobilité urbaine à la demande",
+      "description": "Application de transport et mobilité urbaine connectant passagers et conducteurs. Réservation rapide, suivi en temps réel et paiement intégré.",
+      "url": "https://tibusride.lovable.app",
+      "category": "Transport & Mobilité",
+      "features": [
+        "Courses à la demande",
+        "Géolocalisation en temps réel",
+        "Paiement intégré",
+        "Interface conducteur & passager"
+      ]
+    }
+  ]
+}

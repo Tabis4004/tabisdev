@@ -1,7 +1,11 @@
-import { products } from "@/data/portfolio";
+import { getHeroStats, getProducts, getSiteContent } from "@/lib/content";
 import { IconArrow } from "./icons";
 
 export function Hero() {
+  const { hero } = getSiteContent();
+  const products = getProducts();
+  const stats = getHeroStats();
+
   return (
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
       <div className="pointer-events-none absolute inset-0">
@@ -14,21 +18,19 @@ export function Hero() {
       <div className="relative mx-auto max-w-6xl px-6 text-center">
         <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700">
           <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-          Solutions numériques made in Africa
+          {hero.badge}
         </p>
 
         <h1 className="mx-auto max-w-4xl text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-6xl md:leading-[1.1]">
-          Nous construisons les{" "}
+          {hero.titleBefore}{" "}
           <span className="bg-gradient-to-r from-teal-600 via-violet-600 to-amber-500 bg-clip-text text-transparent">
-            applications
+            {hero.titleHighlight}
           </span>{" "}
-          qui transforment l&apos;Afrique de l&apos;Ouest
+          {hero.titleAfter}
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
-          Tabis Dev conçoit et déploie des plateformes de transport, de gestion
-          commerciale et de paiement mobile — des outils concrets pour les
-          entreprises et les citoyens.
+          {hero.subtitle}
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -66,11 +68,7 @@ export function Hero() {
         </div>
 
         <div className="mx-auto mt-16 grid max-w-3xl grid-cols-3 gap-6 border-t border-slate-200/80 pt-10">
-          {[
-            { value: "4+", label: "Produits actifs", color: "#2563EB" },
-            { value: "5K+", label: "Utilisateurs", color: "#059669" },
-            { value: "20+", label: "Villes connectées", color: "#D97706" },
-          ].map((stat) => (
+          {stats.map((stat) => (
             <div key={stat.label}>
               <p className="text-2xl font-bold md:text-3xl" style={{ color: stat.color }}>
                 {stat.value}

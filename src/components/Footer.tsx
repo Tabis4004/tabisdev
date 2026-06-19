@@ -1,8 +1,10 @@
-import { products } from "@/data/portfolio";
+import { getProducts, getSiteContent } from "@/lib/content";
 import { Logo } from "./Logo";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const { email, domain, footerTagline } = getSiteContent();
+  const products = getProducts();
 
   return (
     <footer className="border-t border-slate-200 bg-white/70 py-12 backdrop-blur-sm">
@@ -15,9 +17,7 @@ export function Footer() {
                 Tabis<span className="text-blue-600">Dev</span>
               </span>
             </div>
-            <p className="mt-3 text-sm text-slate-500">
-              Solutions numériques pour l&apos;Afrique de l&apos;Ouest.
-            </p>
+            <p className="mt-3 text-sm text-slate-500">{footerTagline}</p>
           </div>
 
           <div>
@@ -41,12 +41,18 @@ export function Footer() {
           <div>
             <p className="mb-3 text-sm font-semibold text-slate-900">Contact</p>
             <a
-              href="mailto:tabiscompany@gmail.com"
+              href={`mailto:${email}`}
               className="text-sm text-slate-500 transition-colors hover:text-blue-600"
             >
-              tabiscompany@gmail.com
+              {email}
             </a>
-            <p className="mt-2 text-sm text-slate-500">tabisdev.com</p>
+            <p className="mt-2 text-sm text-slate-500">{domain}</p>
+            <a
+              href="/admin"
+              className="mt-3 inline-block text-sm text-blue-600 hover:text-blue-700"
+            >
+              Éditer le site →
+            </a>
           </div>
         </div>
 

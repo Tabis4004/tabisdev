@@ -1,4 +1,7 @@
+export type ProductId = "tibus" | "gestabiscom" | "tabispay" | "tabisride";
+
 export type Product = {
+  id: ProductId;
   name: string;
   tagline: string;
   description: string;
@@ -12,20 +15,11 @@ export type Product = {
   screenshots: { src: string; alt: string }[];
 };
 
-export const products: Product[] = [
-  {
-    name: "Tibus",
-    tagline: "Voyager par bus devient facile",
-    description:
-      "Plateforme de réservation de billets de bus en Afrique de l'Ouest. Recherche de trajets, comparaison des prix, paiement mobile money et billets numériques avec QR code.",
-    url: "https://tibus.app",
-    category: "Transport & Mobilité",
-    features: [
-      "Réservation en ligne 24/7",
-      "Paiement mobile money sécurisé",
-      "Billets digitaux avec QR code",
-      "Dashboard pour compagnies de bus",
-    ],
+const PRODUCT_THEMES: Record<
+  ProductId,
+  Pick<Product, "accent" | "accentLight" | "gradient" | "icon" | "screenshots">
+> = {
+  tibus: {
     accent: "#0D9488",
     accentLight: "#CCFBF1",
     gradient: "from-teal-500 via-cyan-500 to-blue-600",
@@ -36,19 +30,7 @@ export const products: Product[] = [
       { src: "/screenshots/tibus/tibus-3.png", alt: "Mes réservations Tibus" },
     ],
   },
-  {
-    name: "Gestabiscom",
-    tagline: "Gérez votre activité commerciale",
-    description:
-      "Solution complète de gestion commerciale et terrain : installations, abonnements, équipes, stocks et reporting en temps réel pour les entreprises en croissance.",
-    url: "https://gestabiscom.cervel.app",
-    category: "Gestion & ERP",
-    features: [
-      "Suivi des installations terrain",
-      "Gestion des abonnements clients",
-      "Tableaux de bord analytiques",
-      "Multi-tenant & multi-sites",
-    ],
+  gestabiscom: {
     accent: "#7C3AED",
     accentLight: "#EDE9FE",
     gradient: "from-violet-600 via-purple-500 to-indigo-600",
@@ -59,19 +41,7 @@ export const products: Product[] = [
       { src: "/screenshots/gestabiscom/gestabiscom-3.png", alt: "Gestion produits Gestabiscom" },
     ],
   },
-  {
-    name: "TabisPay",
-    tagline: "Paiements simplifiés",
-    description:
-      "Infrastructure de paiement mobile pour encaisser, suivre et réconcilier les transactions. Conçue pour s'intégrer aux écosystèmes Tabis et aux besoins locaux.",
-    url: "https://tabispay.cervel.app",
-    category: "Fintech",
-    features: [
-      "Encaissement mobile money",
-      "Suivi des transactions",
-      "Réconciliation automatique",
-      "API d'intégration",
-    ],
+  tabispay: {
     accent: "#059669",
     accentLight: "#D1FAE5",
     gradient: "from-emerald-500 via-green-500 to-teal-600",
@@ -82,19 +52,7 @@ export const products: Product[] = [
       { src: "/screenshots/tabispay/tabispay-3.png", alt: "Transactions TabisPay" },
     ],
   },
-  {
-    name: "TabisRide",
-    tagline: "Mobilité urbaine à la demande",
-    description:
-      "Application de transport et mobilité urbaine connectant passagers et conducteurs. Réservation rapide, suivi en temps réel et paiement intégré.",
-    url: "https://tibusride.lovable.app",
-    category: "Transport & Mobilité",
-    features: [
-      "Courses à la demande",
-      "Géolocalisation en temps réel",
-      "Paiement intégré",
-      "Interface conducteur & passager",
-    ],
+  tabisride: {
     accent: "#D97706",
     accentLight: "#FEF3C7",
     gradient: "from-amber-500 via-orange-500 to-rose-500",
@@ -105,4 +63,8 @@ export const products: Product[] = [
       { src: "/screenshots/tabisride/tabisride-3.png", alt: "Espace conducteur TabisRide" },
     ],
   },
-];
+};
+
+export function getProductTheme(id: ProductId) {
+  return PRODUCT_THEMES[id];
+}

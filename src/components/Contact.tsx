@@ -1,4 +1,8 @@
+import { getSiteContent } from "@/lib/content";
+
 export function Contact() {
+  const { email, contact } = getSiteContent();
+
   return (
     <section id="contact" className="py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
@@ -11,27 +15,24 @@ export function Contact() {
               Contact
             </p>
             <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Un projet en tête ?
+              {contact.title}
             </h2>
-            <p className="mt-4 text-lg text-blue-50">
-              Que vous souhaitiez intégrer nos solutions ou développer un nouveau
-              produit, notre équipe est à votre écoute.
-            </p>
+            <p className="mt-4 text-lg text-blue-50">{contact.description}</p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
-                href="mailto:tabiscompany@gmail.com"
+                href={`mailto:${email}`}
                 className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-violet-700 shadow-lg transition-colors hover:bg-blue-50"
               >
-                tabiscompany@gmail.com
+                {email}
               </a>
               <a
-                href="https://tibus.app"
+                href={contact.ctaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full border-2 border-white/60 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/15"
               >
-                Découvrir Tibus
+                {contact.ctaLabel}
               </a>
             </div>
           </div>

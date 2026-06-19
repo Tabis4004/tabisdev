@@ -1,0 +1,94 @@
+backend:
+  name: github
+  repo: Tabis4004/tabisdev
+  branch: main
+
+local_backend: true
+
+media_folder: public/uploads
+public_folder: /uploads
+
+locale: fr
+
+collections:
+  - name: site
+    label: Contenu du site
+    files:
+      - name: main
+        label: Page d'accueil
+        file: content/site.json
+        fields:
+          - label: Email de contact
+            name: email
+            widget: string
+          - label: Domaine
+            name: domain
+            widget: string
+          - label: Slogan footer
+            name: footerTagline
+            widget: string
+
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Badge, name: badge, widget: string }
+              - { label: Titre (avant), name: titleBefore, widget: string }
+              - { label: Titre (mot en couleur), name: titleHighlight, widget: string }
+              - { label: Titre (après), name: titleAfter, widget: string }
+              - { label: Sous-titre, name: subtitle, widget: text }
+              - label: Statistiques
+                name: stats
+                widget: list
+                fields:
+                  - { label: Valeur, name: value, widget: string }
+                  - { label: Libellé, name: label, widget: string }
+
+          - label: Portfolio
+            name: portfolio
+            widget: object
+            fields:
+              - { label: Titre (avant), name: titleBefore, widget: string }
+              - { label: Titre (mot en couleur), name: titleHighlight, widget: string }
+              - { label: Titre (après), name: titleAfter, widget: string }
+              - { label: Sous-titre, name: subtitle, widget: text }
+
+          - label: À propos
+            name: about
+            widget: object
+            fields:
+              - { label: Titre, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - label: Valeurs
+                name: values
+                widget: list
+                fields:
+                  - { label: Titre, name: title, widget: string }
+                  - { label: Description, name: description, widget: text }
+
+          - label: Contact
+            name: contact
+            widget: object
+            fields:
+              - { label: Titre, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Bouton, name: ctaLabel, widget: string }
+              - { label: Lien du bouton, name: ctaUrl, widget: string }
+
+          - label: Produits
+            name: products
+            widget: list
+            fields:
+              - label: Identifiant
+                name: id
+                widget: select
+                options: [tibus, gestabiscom, tabispay, tabisride]
+              - { label: Nom, name: name, widget: string }
+              - { label: Slogan, name: tagline, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: URL, name: url, widget: string }
+              - { label: Catégorie, name: category, widget: string }
+              - label: Fonctionnalités
+                name: features
+                widget: list
+                field: { label: Fonctionnalité, widget: string }
