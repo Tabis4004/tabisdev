@@ -33,9 +33,9 @@ const captures = [
   {
     folder: "tabisride",
     shots: [
-      { file: "tabisride-1.png", url: "https://tabisride.lovable.app" },
-      { file: "tabisride-2.png", url: "https://tabisride.lovable.app" },
-      { file: "tabisride-3.png", url: "https://tabisride.lovable.app" },
+      { file: "tabisride-1.png", url: "https://tibusride.lovable.app" },
+      { file: "tabisride-2.png", url: "https://tibusride.lovable.app" },
+      { file: "tabisride-3.png", url: "https://tibusride.lovable.app" },
     ],
   },
 ];

@@ -9,7 +9,7 @@ Site vitrine du portfolio [tabisdev.com](https://tabisdev.com), présentant les 
 | Tibus | https://tibus.app | Application séparée |
 | Gestabiscom | https://gestabiscom.cervel.app | `hbr_backend` (NestJS) |
 | TabisPay | https://tabispay.cervel.app | Backend dédié TabisPay |
-| TabisRide | https://tabisride.lovable.app | Backend dédié TabisRide |
+| TabisRide | https://tibusride.lovable.app | Backend dédié TabisRide |
 
 ## Architecture — Où est le backend ?
 
