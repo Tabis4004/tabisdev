@@ -8,6 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tabisdev.com"),
   title: "Tabis Dev — Solutions numériques pour l'Afrique de l'Ouest",
   description:
     "Découvrez le portfolio Tabis Dev : Tibus, Gestabiscom, TabisPay et TabisRide. Transport, gestion commerciale et paiements mobiles.",
@@ -28,6 +29,11 @@ export const metadata: Metadata = {
     siteName: "Tabis Dev",
     locale: "fr_FR",
     type: "website",
+    images: [{ url: "/logo.png", width: 512, height: 512, alt: "Tabis Dev" }],
+  },
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
   },
 };
 

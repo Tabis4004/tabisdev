@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Logo } from "./Logo";
 
 const navLinks = [
   { href: "#portfolio", label: "Portfolio" },
@@ -15,9 +16,7 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#0B1120]/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="#" className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 text-sm font-bold text-white">
-            TD
-          </span>
+          <Logo size={36} />
           <span className="text-lg font-semibold tracking-tight text-white">
             Tabis<span className="text-blue-400">Dev</span>
           </span>

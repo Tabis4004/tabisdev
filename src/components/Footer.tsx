@@ -1,4 +1,5 @@
 import { products } from "@/data/portfolio";
+import { Logo } from "./Logo";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -9,9 +10,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 text-xs font-bold text-white">
-                TD
-              </span>
+              <Logo size={32} />
               <span className="font-semibold text-white">
                 Tabis<span className="text-blue-400">Dev</span>
               </span>
