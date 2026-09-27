@@ -11,10 +11,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://tabisdev.com"),
   title: "Tabis Dev — Solutions numériques pour l'Afrique de l'Ouest",
   description:
-    "Découvrez le portfolio Tabis Dev : Tibus, Gestabiscom, TabisPay et TabisRide. Transport, gestion commerciale et paiements mobiles.",
+    "Découvrez le portfolio Tabis Dev : Tibus, Tibus Courrier, Tista, TiConnect, Gestabiscom, TabisPay et TabisRide. Transport, courrier, stations-service, services, gestion commerciale et paiements mobiles.",
   keywords: [
     "Tabis Dev",
     "Tibus",
+    "Tibus Courrier",
+    "Tista",
+    "TiConnect",
+    "SYSCOHADA",
     "Gestabiscom",
     "TabisPay",
     "TabisRide",
@@ -24,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Tabis Dev — Solutions numériques pour l'Afrique de l'Ouest",
     description:
-      "Transport, gestion commerciale et paiements mobiles — nos produits au service des entreprises et des citoyens.",
+      "Transport, courrier, stations-service, services, gestion commerciale et paiements mobiles — nos produits au service des entreprises et des citoyens.",
     url: "https://tabisdev.com",
     siteName: "Tabis Dev",
     locale: "fr_FR",

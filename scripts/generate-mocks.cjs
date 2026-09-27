@@ -2,10 +2,32 @@ const puppeteer = require("puppeteer-core");
 const fs = require("fs");
 const path = require("path");
 
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const CHROME =
+  process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+// ONLY=tista,ticonnect  → ne régénère que ces dossiers
+const ONLY = process.env.ONLY ? process.env.ONLY.split(",") : null;
 const OUT = path.join(__dirname, "../public/screenshots");
 
+const ROSE = "#E11D48";
+const SKY = "#0284C7";
+const INDIGO = "#4F46E5";
+
 const mocks = {
+  tibuscourrier: [
+    { file: "tibuscourrier-1.png", title: "Tableau de bord", html: mockCourrierDashboard() },
+    { file: "tibuscourrier-2.png", title: "Embarquement", html: mockCourrierScan() },
+    { file: "tibuscourrier-3.png", title: "Rapport financier", html: mockCourrierReport() },
+  ],
+  tista: [
+    { file: "tista-1.png", title: "Ventes par index", html: mockTistaIndex() },
+    { file: "tista-2.png", title: "Bons & cartes", html: mockTistaVouchers() },
+    { file: "tista-3.png", title: "Bilan", html: mockTistaBilan() },
+  ],
+  ticonnect: [
+    { file: "ticonnect-1.png", title: "Recherche", html: mockConnectSearch() },
+    { file: "ticonnect-2.png", title: "Profil artisan", html: mockConnectProfile() },
+    { file: "ticonnect-3.png", title: "Demandes", html: mockConnectRequests() },
+  ],
   tabispay: [
     {
       file: "tabispay-1.png",
@@ -253,6 +275,269 @@ function mockGestabisProducts() {
   `, "#8B5CF6");
 }
 
+
+function statusPill(label, color) {
+  return `<div class="pill" style="background:${color}22;color:${color}">${label}</div>`;
+}
+
+function mockCourrierDashboard() {
+  return shell(`
+    <div class="top"><div class="brand">Tibus Courrier</div><div class="nav"><span>Guichet</span><span>Embarquement</span><span>Remises</span><span>Rapports</span></div></div>
+    <div class="content">
+      <div class="grid cards">
+        <div class="card"><div class="label">Colis enregistrés</div><div class="value" style="color:${ROSE}">148</div></div>
+        <div class="card"><div class="label">Embarqués</div><div class="value" style="color:#3B82F6">121</div></div>
+        <div class="card"><div class="label">Remis au destinataire</div><div class="value" style="color:#10B981">96</div></div>
+        <div class="card"><div class="label">Recette du jour</div><div class="value" style="color:#F59E0B">742 500 XOF</div></div>
+      </div>
+      <div class="panel" style="margin-top:18px">
+        <div style="font-weight:800;font-size:18px;margin-bottom:12px">Derniers envois</div>
+        ${[
+          ["CR-20417", "Lomé → Abidjan · 2 colis, 14 kg", "Embarqué", "#3B82F6"],
+          ["CR-20416", "Lomé → Cotonou · Enveloppe", "Remis", "#10B981"],
+          ["CR-20415", "Lomé → Ouagadougou · 1 carton", "Emballé", ROSE],
+          ["CR-20414", "Lomé → Accra · 3 colis, 22 kg", "En transit", "#F59E0B"],
+        ]
+          .map(
+            ([id, route, status, color]) =>
+              `<div class="row"><div><strong>${id}</strong><div class="label">${route}</div></div>${statusPill(status, color)}</div>`
+          )
+          .join("")}
+      </div>
+    </div>
+  `, ROSE);
+}
+
+function mockCourrierScan() {
+  return shell(`
+    <div class="top"><div class="brand">Tibus Courrier · Embarquement</div><div class="nav"><span>Car TG-4521</span><span>Départ 08:30</span></div></div>
+    <div class="content" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:20px">
+      <div class="panel" style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff1f2,#fff)">
+        <div style="width:220px;height:220px;border-radius:28px;border:6px dashed ${ROSE};display:grid;place-items:center;font-size:84px;color:${ROSE}">▦</div>
+        <div style="margin-top:18px;font-weight:800;font-size:20px">Scanner l'étiquette du colis</div>
+        <div class="label" style="margin-top:6px">32 / 38 colis chargés</div>
+        <div style="width:260px;height:10px;border-radius:99px;background:#ffe4e6;margin-top:12px"><div style="width:84%;height:100%;border-radius:99px;background:${ROSE}"></div></div>
+      </div>
+      <div class="panel">
+        <div style="font-weight:800;font-size:18px;margin-bottom:6px">Manifeste de chargement</div>
+        ${[
+          ["CR-20417", "Kossi A. → Aya K.", "Scanné", "#10B981"],
+          ["CR-20412", "Afi M. → Moussa D.", "Scanné", "#10B981"],
+          ["CR-20409", "Société BTP → Agence Abidjan", "Scanné", "#10B981"],
+          ["CR-20405", "Yao E. → Fatou S.", "À charger", ROSE],
+          ["CR-20401", "Pharma+ → Clinique Sainte-Anne", "À charger", ROSE],
+        ]
+          .map(
+            ([id, who, status, color]) =>
+              `<div class="row"><div><strong>${id}</strong><div class="label">${who}</div></div>${statusPill(status, color)}</div>`
+          )
+          .join("")}
+      </div>
+    </div>
+  `, ROSE);
+}
+
+function mockCourrierReport() {
+  const bars = [62, 80, 55, 91, 74, 98, 70];
+  return shell(`
+    <div class="top"><div class="brand">Tibus Courrier · Rapport financier</div><div class="nav"><span>Semaine</span><span>Mois</span><span>Exporter</span></div></div>
+    <div class="content">
+      <div class="grid cards">
+        <div class="card"><div class="label">Chiffre d'affaires</div><div class="value" style="color:${ROSE}">4,8M XOF</div></div>
+        <div class="card"><div class="label">Frais d'emballage</div><div class="value" style="color:#3B82F6">312 000</div></div>
+        <div class="card"><div class="label">Commissions agences</div><div class="value" style="color:#F59E0B">540 000</div></div>
+        <div class="card"><div class="label">Encaissé / attendu</div><div class="value" style="color:#10B981">96%</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.3fr .7fr;gap:16px;margin-top:16px">
+        <div class="panel">
+          <strong>Recettes par jour</strong>
+          <div style="display:flex;align-items:flex-end;gap:14px;height:230px;margin-top:16px">
+            ${bars.map((h, i) => `<div style="flex:1;text-align:center"><div style="height:${h * 2}px;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,${ROSE},#fb7185)"></div><div class="label" style="margin-top:6px">${["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"][i]}</div></div>`).join("")}
+          </div>
+        </div>
+        <div class="panel">
+          <strong>Par agence</strong>
+          ${[["Lomé", "2,1M"], ["Abidjan", "1,4M"], ["Cotonou", "0,8M"], ["Accra", "0,5M"]]
+            .map(([a, v]) => `<div class="row"><span>${a}</span><strong>${v} XOF</strong></div>`)
+            .join("")}
+        </div>
+      </div>
+    </div>
+  `, ROSE);
+}
+
+function mockTistaIndex() {
+  return shell(`
+    <div class="top"><div class="brand">Tista</div><div class="nav"><span>Ventes</span><span>Bons</span><span>Dépenses</span><span>Bilan</span></div></div>
+    <div class="content">
+      <div class="grid cards">
+        <div class="card"><div class="label">Litres vendus</div><div class="value" style="color:${SKY}">8 426 L</div></div>
+        <div class="card"><div class="label">Ventes du jour</div><div class="value" style="color:#10B981">5,6M XOF</div></div>
+        <div class="card"><div class="label">Bons consommés</div><div class="value" style="color:#F59E0B">412 000</div></div>
+        <div class="card"><div class="label">Écart caisse</div><div class="value" style="color:#EF4444">-2 500</div></div>
+      </div>
+      <div class="panel" style="margin-top:18px">
+        <div style="font-weight:800;font-size:18px;margin-bottom:6px">Relevé des index — Équipe du matin</div>
+        <div class="row label" style="font-weight:700"><span style="width:18%">Pompe</span><span style="width:18%">Index début</span><span style="width:18%">Index fin</span><span style="width:14%">Litres</span><span style="width:16%">Prix/L</span><span style="width:16%;text-align:right">Montant</span></div>
+        ${[
+          ["P1 · Super", "1 245 310", "1 247 180", "1 870", "680", "1 271 600"],
+          ["P2 · Super", "982 440", "984 015", "1 575", "680", "1 071 000"],
+          ["P3 · Gasoil", "2 118 900", "2 121 460", "2 560", "675", "1 728 000"],
+          ["P4 · Gasoil", "1 604 220", "1 606 641", "2 421", "675", "1 634 175"],
+        ]
+          .map(
+            (r) =>
+              `<div class="row"><strong style="width:18%">${r[0]}</strong><span style="width:18%">${r[1]}</span><span style="width:18%">${r[2]}</span><span style="width:14%">${r[3]}</span><span style="width:16%">${r[4]}</span><strong style="width:16%;text-align:right;color:${SKY}">${r[5]}</strong></div>`
+          )
+          .join("")}
+      </div>
+    </div>
+  `, SKY);
+}
+
+function mockTistaVouchers() {
+  return shell(`
+    <div class="top"><div class="brand">Tista · Bons & cartes prépayées</div><div class="nav"><span>Émettre</span><span>Consommations</span></div></div>
+    <div class="content" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div>
+        <div class="panel" style="background:linear-gradient(135deg,${SKY},#1e3a8a);color:#fff;height:210px;display:flex;flex-direction:column;justify-content:space-between">
+          <div style="display:flex;justify-content:space-between"><strong style="font-size:20px">Carte prépayée Tista</strong><span>⛽</span></div>
+          <div style="font-size:30px;font-weight:800;letter-spacing:2px">TST 4821 0093</div>
+          <div style="display:flex;justify-content:space-between;opacity:.9"><span>Transports Adjo SARL</span><strong>Solde 185 000 XOF</strong></div>
+        </div>
+        <div class="panel" style="margin-top:16px">
+          <strong>Émettre un bon d'essence</strong>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px">
+            ${["10 000", "25 000", "50 000"].map((v, i) => `<div class="card" style="text-align:center;border:2px solid ${i === 1 ? SKY : "#e2e8f0"}"><strong>${v}</strong><div class="label">XOF</div></div>`).join("")}
+          </div>
+          <div class="btn" style="margin-top:14px">Générer le bon</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div style="font-weight:800;font-size:18px;margin-bottom:6px">Dernières consommations</div>
+        ${[
+          ["BON-7731", "Super · 36,7 L", "25 000", "Consommé", "#10B981"],
+          ["TST 4821", "Gasoil · 74,1 L", "50 000", "Débité", SKY],
+          ["BON-7729", "Super · 14,7 L", "10 000", "Consommé", "#10B981"],
+          ["BON-7728", "—", "25 000", "Émis", "#F59E0B"],
+          ["TST 3310", "Gasoil · 29,6 L", "20 000", "Débité", SKY],
+        ]
+          .map(
+            ([id, d, v, s, c]) =>
+              `<div class="row"><div><strong>${id}</strong><div class="label">${d}</div></div><div style="text-align:right"><strong>${v} XOF</strong>${statusPill(s, c)}</div></div>`
+          )
+          .join("")}
+      </div>
+    </div>
+  `, SKY);
+}
+
+function mockTistaBilan() {
+  const line = (a, b, strong) =>
+    `<div class="row"${strong ? ' style="font-weight:800"' : ""}><span>${a}</span><span>${b}</span></div>`;
+  return shell(`
+    <div class="top"><div class="brand">Tista · Bilan SYSCOHADA</div><div class="nav"><span>Exercice 2026</span><span>Exporter PDF</span></div></div>
+    <div class="content" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div class="panel">
+        <div style="font-weight:800;font-size:18px;margin-bottom:6px;color:${SKY}">Actif</div>
+        ${line("Immobilisations corporelles (cuves, pompes)", "48 500 000")}
+        ${line("Stocks de carburant", "12 840 000")}
+        ${line("Créances clients (bons, cartes)", "3 215 000")}
+        ${line("Trésorerie – Banque", "9 460 000")}
+        ${line("Trésorerie – Caisse", "1 120 000")}
+        ${line("Total actif", "75 135 000", true)}
+      </div>
+      <div class="panel">
+        <div style="font-weight:800;font-size:18px;margin-bottom:6px;color:${SKY}">Passif</div>
+        ${line("Capital social", "40 000 000")}
+        ${line("Résultat net de l'exercice", "8 245 000")}
+        ${line("Fournisseurs de carburant", "18 600 000")}
+        ${line("Cartes prépayées non consommées", "4 890 000")}
+        ${line("Dettes fiscales et sociales", "3 400 000")}
+        ${line("Total passif", "75 135 000", true)}
+      </div>
+    </div>
+  `, SKY);
+}
+
+function mockConnectSearch() {
+  return shell(`
+    <div class="top"><div class="brand">TiConnect</div><div class="nav"><span>Trouver un artisan</span><span>Mes demandes</span><span>Devenir artisan</span></div></div>
+    <div class="content">
+      <div class="panel" style="display:flex;gap:12px;align-items:center">
+        <div style="flex:1;padding:14px 18px;border-radius:14px;background:#f1f5f9;color:#64748b">🔍  Plombier à Lomé, Bè</div>
+        <div class="btn">Rechercher</div>
+      </div>
+      <div style="display:flex;gap:10px;margin:16px 0">
+        ${["Plomberie", "Électricité", "Maçonnerie", "Menuiserie", "Peinture", "Climatisation"].map((m, i) => `<span class="pill" style="font-size:13px;padding:8px 14px;background:${i === 0 ? INDIGO : "#fff"};color:${i === 0 ? "#fff" : "#334155"}">${m}</span>`).join("")}
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+        ${[
+          ["Kodjo A.", "Plombier · 12 ans d'exp.", "4.9", "1,2 km"],
+          ["Mawuli T.", "Plombier-sanitaire", "4.8", "2,5 km"],
+          ["Edem K.", "Plombier · Chauffe-eau", "4.7", "3,1 km"],
+        ]
+          .map(
+            ([n, m, r, d]) =>
+              `<div class="card"><div style="display:flex;gap:12px;align-items:center"><div style="width:52px;height:52px;border-radius:16px;background:${INDIGO}22;display:grid;place-items:center;font-size:24px">🔧</div><div><strong>${n}</strong><div class="label">${m}</div></div></div><div style="display:flex;justify-content:space-between;margin-top:14px"><span>⭐ ${r}</span><span class="label">${d}</span></div><div class="btn" style="margin-top:12px;width:100%;text-align:center;padding:10px">Contacter</div></div>`
+          )
+          .join("")}
+      </div>
+    </div>
+  `, INDIGO);
+}
+
+function mockConnectProfile() {
+  return shell(`
+    <div class="top"><div class="brand">TiConnect · Profil artisan</div></div>
+    <div class="content" style="display:grid;grid-template-columns:.8fr 1.2fr;gap:20px">
+      <div class="panel" style="text-align:center;background:linear-gradient(180deg,#eef2ff,#fff)">
+        <div style="width:110px;height:110px;margin:0 auto;border-radius:32px;background:${INDIGO};display:grid;place-items:center;font-size:48px">⚡</div>
+        <div style="font-size:22px;font-weight:800;margin-top:14px">Sena D.</div>
+        <div class="label">Électricien bâtiment · Lomé</div>
+        <div style="margin-top:10px">${statusPill("Profil vérifié", "#10B981")}</div>
+        <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:18px">
+          <div><strong style="font-size:20px">4.9</strong><div class="label">Note</div></div>
+          <div><strong style="font-size:20px">187</strong><div class="label">Missions</div></div>
+          <div><strong style="font-size:20px">9 ans</strong><div class="label">Expérience</div></div>
+        </div>
+        <div class="btn" style="margin-top:18px;width:100%">Demander un devis</div>
+      </div>
+      <div class="panel">
+        <div style="font-weight:800;font-size:18px;margin-bottom:6px">Avis clients</div>
+        ${[
+          ["Installation tableau électrique", "Travail propre et rapide, très professionnel."],
+          ["Dépannage court-circuit", "Arrivé en moins d'une heure, problème réglé."],
+          ["Câblage boutique", "Bon conseil sur le matériel, prix respecté."],
+        ]
+          .map(([t, c]) => `<div class="row" style="align-items:flex-start"><div><strong>${t}</strong><div class="label" style="margin-top:4px">${c}</div></div><span>⭐⭐⭐⭐⭐</span></div>`)
+          .join("")}
+      </div>
+    </div>
+  `, INDIGO);
+}
+
+function mockConnectRequests() {
+  return shell(`
+    <div class="top"><div class="brand">TiConnect · Mes demandes</div><div class="nav"><span>En cours</span><span>Terminées</span></div></div>
+    <div class="content">
+      <div class="panel">
+        ${[
+          ["Fuite sous évier", "Plomberie · Kodjo A.", "Artisan en route", "#3B82F6"],
+          ["Peinture salon 30 m²", "Peinture · 3 devis reçus", "Devis à comparer", "#F59E0B"],
+          ["Porte d'entrée à changer", "Menuiserie · Yawo B.", "Planifié jeudi", INDIGO],
+          ["Prise électrique cuisine", "Électricité · Sena D.", "Terminé", "#10B981"],
+        ]
+          .map(
+            ([t, d, s, c]) =>
+              `<div class="row"><div><strong>${t}</strong><div class="label">${d}</div></div>${statusPill(s, c)}</div>`
+          )
+          .join("")}
+      </div>
+    </div>
+  `, INDIGO);
+}
+
 async function main() {
   const browser = await puppeteer.launch({
     executablePath: CHROME,
@@ -263,6 +548,7 @@ async function main() {
   await page.setViewport({ width: 1280, height: 800, deviceScaleFactor: 2 });
 
   for (const [folder, shots] of Object.entries(mocks)) {
+    if (ONLY && !ONLY.includes(folder)) continue;
     const dir = path.join(OUT, folder);
     fs.mkdirSync(dir, { recursive: true });
     for (const shot of shots) {

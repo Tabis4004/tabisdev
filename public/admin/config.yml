@@ -82,12 +82,13 @@ collections:
               - label: Identifiant
                 name: id
                 widget: select
-                options: [tibus, gestabiscom, tabispay, tabisride]
+                options: [tibus, tibuscourrier, tista, ticonnect, gestabiscom, tabispay, tabisride]
               - { label: Nom, name: name, widget: string }
               - { label: Slogan, name: tagline, widget: string }
               - { label: Description, name: description, widget: text }
               - { label: URL, name: url, widget: string }
               - { label: Catégorie, name: category, widget: string }
+              - { label: Badge (ex. Nouveau), name: badge, widget: string, required: false }
               - label: Fonctionnalités
                 name: features
                 widget: list

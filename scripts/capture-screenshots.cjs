@@ -7,6 +7,18 @@ const OUT = path.join(__dirname, "../public/screenshots");
 
 const captures = [
   {
+    folder: "tibuscourrier",
+    shots: [{ file: "tibuscourrier-1.png", url: "https://courrier-agent.isidoretabati.workers.dev" }],
+  },
+  {
+    folder: "tista",
+    shots: [{ file: "tista-1.png", url: "https://tista.isidoretabati.workers.dev" }],
+  },
+  {
+    folder: "ticonnect",
+    shots: [{ file: "ticonnect-1.png", url: "https://ticonnect.isidoretabati.workers.dev" }],
+  },
+  {
     folder: "tibus",
     shots: [
       { file: "tibus-1.png", url: "https://tibus.app/fr" },

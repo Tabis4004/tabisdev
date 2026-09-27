@@ -37,6 +37,34 @@ export function IconRide({ className }: { className?: string }) {
   );
 }
 
+export function IconParcel({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M21 8l-9-5-9 5v8l9 5 9-5V8z" />
+      <path d="M3 8l9 5 9-5M12 13v8M7.5 5.5l9 5" />
+    </svg>
+  );
+}
+
+export function IconFuel({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M4 21V5a2 2 0 012-2h7a2 2 0 012 2v16M3 21h13" />
+      <path d="M7 7h5v4H7zM15 10h2a2 2 0 012 2v4a1.5 1.5 0 003 0V8l-3-3" />
+    </svg>
+  );
+}
+
+export function IconConnect({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="7" cy="7" r="3" />
+      <circle cx="17" cy="17" r="3" />
+      <path d="M2 21v-1a5 5 0 015-5h1M22 3v1a5 5 0 01-5 5h-1M10 7h4l-2-2M14 17h-4l2 2" />
+    </svg>
+  );
+}
+
 export function IconArrow({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -2,7 +2,10 @@ import type { Product } from "@/data/portfolio";
 import {
   IconBus,
   IconCommerce,
+  IconConnect,
   IconExternal,
+  IconFuel,
+  IconParcel,
   IconPayment,
   IconRide,
 } from "./icons";
@@ -13,6 +16,9 @@ const iconMap = {
   commerce: IconCommerce,
   payment: IconPayment,
   ride: IconRide,
+  parcel: IconParcel,
+  fuel: IconFuel,
+  connect: IconConnect,
 };
 
 export function ProductShowcase({
@@ -60,6 +66,14 @@ export function ProductShowcase({
             >
               {product.category}
             </span>
+            {product.badge && (
+              <span
+                className="rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-white"
+                style={{ background: `linear-gradient(135deg, ${product.accent}, ${product.accent}cc)` }}
+              >
+                {product.badge}
+              </span>
+            )}
           </div>
 
           <h3 className="text-3xl font-bold text-slate-900 md:text-4xl">{product.name}</h3>

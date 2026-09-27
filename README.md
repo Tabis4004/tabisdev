@@ -7,6 +7,9 @@ Site vitrine du portfolio [tabisdev.com](https://tabisdev.com), présentant les 
 | Produit | URL | Backend |
 |---------|-----|---------|
 | Tibus | https://tibus.app | Application séparée |
+| Tibus Courrier | https://courrier-agent.isidoretabati.workers.dev | Application séparée (monorepo tibus-front) |
+| Tista | https://tista.isidoretabati.workers.dev | Application séparée |
+| TiConnect | https://ticonnect.isidoretabati.workers.dev | Application séparée |
 | Gestabiscom | https://gestabiscom.cervel.app | `hbr_backend` (NestJS) |
 | TabisPay | https://tabispay.cervel.app | Backend dédié TabisPay |
 | TabisRide | https://tibusride.lovable.app | Backend dédié TabisRide |

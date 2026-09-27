@@ -37,6 +37,7 @@ export type SiteContent = {
     description: string;
     url: string;
     category: string;
+    badge?: string;
     features: string[];
   }[];
 };
