@@ -17,6 +17,9 @@
   "images": {
     "binding": "IMAGES"
   },
+  "vars": {
+    "DECAP_ALLOWED_USERS": "Tabis4004"
+  },
   "observability": {
     "enabled": true
   }

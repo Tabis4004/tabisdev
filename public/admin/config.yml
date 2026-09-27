@@ -2,6 +2,10 @@ backend:
   name: github
   repo: Tabis4004/tabisdev
   branch: main
+  # Passerelle OAuth GitHub servie par le site lui-même (src/app/api/decap/)
+  base_url: https://tabisdev.isidoretabati.workers.dev
+  auth_endpoint: api/decap/auth
+  auth_scope: public_repo
 
 local_backend: true
 

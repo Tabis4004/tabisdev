@@ -60,22 +60,31 @@ Les **couleurs** et **captures d'écran** de chaque produit restent dans le code
 
 ## Configurer l'éditeur en production (une fois)
 
-Pour que `/admin` fonctionne sur tabisdev.com sans `npm run cms` :
+La connexion GitHub de `/admin` passe par une petite passerelle OAuth intégrée au site
+(`src/app/api/decap/auth` et `src/app/api/decap/callback`). Aucun service externe à déployer.
 
-1. GitHub → **Settings → Developer settings → OAuth Apps → New**
-   - Homepage : `https://tabisdev.com`
-   - Callback : `https://api.netlify.com/auth/done` *(ou votre propre service OAuth)*
+1. **Créer l'OAuth App GitHub** — GitHub → **Settings → Developer settings → OAuth Apps → New OAuth App**
+   - Application name : `Tabis Dev CMS`
+   - Homepage URL : `https://tabisdev.isidoretabati.workers.dev`
+   - Authorization callback URL : `https://tabisdev.isidoretabati.workers.dev/api/decap/callback`
+   - Puis **Generate a new client secret** et notez le *Client ID* et le *Client secret*.
 
-2. Déployez un petit service OAuth (ex. [decap-cms-github-oauth](https://github.com/daresaydigital/decap-cms-github-oauth-provider)) sur Cloudflare Workers (ex. [decap-proxy](https://github.com/sterlingwes/decap-proxy))
-
-3. Dans `public/admin/config.yml`, ajoutez :
-   ```yaml
-   backend:
-     name: github
-     repo: Tabis4004/tabisdev
-     branch: main
-     base_url: https://votre-oauth.isidoretabati.workers.dev
-     auth_endpoint: auth
+2. **Enregistrer les secrets dans le Worker** :
+   ```bash
+   npx wrangler secret put GITHUB_CLIENT_ID      # colle le Client ID
+   npx wrangler secret put GITHUB_CLIENT_SECRET  # colle le Client secret
    ```
 
-En attendant, utilisez **GitHub** (option 2) ou l'éditeur **local** (option 1).
+3. **Comptes autorisés** : seuls les logins GitHub listés dans `DECAP_ALLOWED_USERS`
+   (`wrangler.jsonc` → `vars`, par défaut `Tabis4004`) peuvent se connecter, même s'ils ont accès au dépôt.
+
+4. **(Recommandé) Verrouiller `/admin` avec Cloudflare Access** — Zero Trust → Access → Applications →
+   Self-hosted → domaine du site, chemin `admin` → policy *Allow* sur votre e-mail (code à usage unique).
+
+### Passage sur tabisdev.com
+
+Quand le domaine sera branché au Worker, remplacez l'adresse `tabisdev.isidoretabati.workers.dev` :
+- dans `public/admin/config.yml` (`base_url`) ;
+- dans l'OAuth App GitHub (Homepage + callback URL).
+
+En attendant, l'éditeur **local** (option 1) et **GitHub** (option 2) fonctionnent toujours.
