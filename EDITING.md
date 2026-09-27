@@ -18,7 +18,7 @@ Ouvrez **http://localhost:3000/admin**, modifiez le contenu, puis cliquez **Publ
 
 1. Allez sur **https://tabisdev.com/admin** (ou tabisdev.isidoretabati.workers.dev/admin)
 2. Connectez-vous avec votre compte **GitHub** (accès au repo `Tabis4004/tabisdev`)
-3. Modifiez et publiez — GitHub Actions redéploie automatiquement sur Cloudflare
+3. Modifiez et publiez — Cloudflare redéploie automatiquement
 
 > **Première utilisation en prod** : il faut configurer l'authentification GitHub OAuth. Voir la section ci-dessous.
 

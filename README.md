@@ -48,15 +48,19 @@ npm run preview    # aperçu dans le runtime Cloudflare (workerd)
 Le site est déployé sur le Worker **`tabisdev`** (https://tabisdev.isidoretabati.workers.dev).
 Configuration : `wrangler.jsonc` + `open-next.config.ts`.
 
-### Automatique (recommandé)
+### Automatique (Workers Builds)
 
-Chaque `git push` sur `main` lance `.github/workflows/deploy.yml`, qui construit le site avec OpenNext et le déploie.
-Secrets GitHub requis (**Settings → Secrets and variables → Actions**) :
+Le Worker `tabisdev` est relié au dépôt GitHub (Cloudflare → Workers & Pages → tabisdev → **Settings → Build**).
+Chaque `git push` sur `main` construit et déploie le site. Réglages attendus :
 
-| Secret | Où le trouver |
-|--------|---------------|
-| `CLOUDFLARE_API_TOKEN` | Cloudflare → My Profile → API Tokens → modèle « Edit Cloudflare Workers » |
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare → Workers & Pages → colonne de droite « Account ID » |
+| Champ | Valeur |
+|-------|--------|
+| Build command | `npx opennextjs-cloudflare build` |
+| Deploy command | `npx opennextjs-cloudflare deploy` |
+| Root directory | `/` |
+
+> Ne pas utiliser `npm run build` + `npx wrangler deploy` : le build Next.js seul ne produit pas
+> la sortie OpenNext et le déploiement échoue (« Could not find compiled Open Next config »).
 
 ### Manuel
 
@@ -74,7 +78,7 @@ Cloudflare → Workers & Pages → `tabisdev` → **Settings → Domains & Route
 Tout le texte (email, titres, produits, liens…) est dans **`content/site.json`**.
 
 - **Interface web** : [EDITING.md](./EDITING.md) — `/admin` avec Decap CMS
-- **Rapide** : modifier `content/site.json` sur GitHub → le workflow redéploie automatiquement
+- **Rapide** : modifier `content/site.json` sur GitHub → Cloudflare redéploie automatiquement
 
 ```bash
 npm run dev   # site
