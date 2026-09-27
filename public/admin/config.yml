@@ -96,4 +96,4 @@ collections:
               - label: Fonctionnalités
                 name: features
                 widget: list
-                field: { label: Fonctionnalité, widget: string }
+                field: { label: Fonctionnalité, name: feature, widget: string }
