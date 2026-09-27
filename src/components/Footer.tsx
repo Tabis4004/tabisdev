@@ -47,12 +47,6 @@ export function Footer() {
               {email}
             </a>
             <p className="mt-2 text-sm text-slate-500">{domain}</p>
-            <a
-              href="/admin"
-              className="mt-3 inline-block text-sm text-blue-600 hover:text-blue-700"
-            >
-              Éditer le site →
-            </a>
           </div>
         </div>
 
