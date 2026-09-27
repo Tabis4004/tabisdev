@@ -16,9 +16,9 @@ Ouvrez **http://localhost:3000/admin**, modifiez le contenu, puis cliquez **Publ
 
 ### En production
 
-1. Allez sur **https://tabisdev.com/admin** (ou tabisdev.vercel.app/admin)
+1. Allez sur **https://tabisdev.com/admin** (ou tabisdev.isidoretabati.workers.dev/admin)
 2. Connectez-vous avec votre compte **GitHub** (accès au repo `Tabis4004/tabisdev`)
-3. Modifiez et publiez — Vercel redéploie automatiquement
+3. Modifiez et publiez — GitHub Actions redéploie automatiquement sur Cloudflare
 
 > **Première utilisation en prod** : il faut configurer l'authentification GitHub OAuth. Voir la section ci-dessous.
 
@@ -28,7 +28,7 @@ Ouvrez **http://localhost:3000/admin**, modifiez le contenu, puis cliquez **Publ
 
 1. Ouvrez [content/site.json](https://github.com/Tabis4004/tabisdev/edit/main/content/site.json) sur GitHub
 2. Modifiez le texte
-3. Cliquez **Commit changes** — Vercel redéploie en ~1 min
+3. Cliquez **Commit changes** — le site est redéployé sur Cloudflare en ~2 min
 
 ---
 
@@ -66,7 +66,7 @@ Pour que `/admin` fonctionne sur tabisdev.com sans `npm run cms` :
    - Homepage : `https://tabisdev.com`
    - Callback : `https://api.netlify.com/auth/done` *(ou votre propre service OAuth)*
 
-2. Déployez un petit service OAuth (ex. [decap-cms-github-oauth](https://github.com/daresaydigital/decap-cms-github-oauth-provider)) sur Vercel
+2. Déployez un petit service OAuth (ex. [decap-cms-github-oauth](https://github.com/daresaydigital/decap-cms-github-oauth-provider)) sur Cloudflare Workers (ex. [decap-proxy](https://github.com/sterlingwes/decap-proxy))
 
 3. Dans `public/admin/config.yml`, ajoutez :
    ```yaml
@@ -74,7 +74,7 @@ Pour que `/admin` fonctionne sur tabisdev.com sans `npm run cms` :
      name: github
      repo: Tabis4004/tabisdev
      branch: main
-     base_url: https://votre-oauth.vercel.app
+     base_url: https://votre-oauth.isidoretabati.workers.dev
      auth_endpoint: auth
    ```
 

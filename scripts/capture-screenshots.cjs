@@ -29,9 +29,9 @@ const captures = [
   {
     folder: "gestabiscom",
     shots: [
-      { file: "gestabiscom-1.png", url: "https://gestabiscom.vercel.app/home" },
-      { file: "gestabiscom-2.png", url: "https://gestabiscom.vercel.app/home" },
-      { file: "gestabiscom-3.png", url: "https://gestabiscom.vercel.app/home" },
+      { file: "gestabiscom-1.png", url: "https://gestabis.isidoretabati.workers.dev" },
+      { file: "gestabiscom-2.png", url: "https://gestabis.isidoretabati.workers.dev" },
+      { file: "gestabiscom-3.png", url: "https://gestabis.isidoretabati.workers.dev" },
     ],
   },
   {

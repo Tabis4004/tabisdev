@@ -16,13 +16,16 @@ Site vitrine du portfolio [tabisdev.com](https://tabisdev.com), présentant les 
 
 ## Architecture — Où est le backend ?
 
-**Ce site n'a pas de backend.** C'est une vitrine statique (Next.js) qui affiche du contenu et des liens vers vos applications.
+**Ce site n'a pas de backend.** C'est une vitrine Next.js (pages pré-rendues) qui affiche du contenu et des liens vers vos applications. Elle est hébergée sur **Cloudflare Workers** via [OpenNext](https://opennext.js.org/cloudflare).
 
 ```
-tabisdev.com (Vercel)
-└── Site vitrine statique — HTML/CSS/JS, images, pas d'API
+tabisdev.com (Cloudflare Workers — Worker « tabisdev »)
+└── Site vitrine — HTML/CSS/JS, images, pas d'API
 
 tibus.app          → son propre backend
+courrier-agent.*   → Tibus Courrier (monorepo tibus-front)
+tista.*            → Tista
+ticonnect.*        → TiConnect
 gestabiscom.*      → hbr_backend (NestJS + PostgreSQL)
 tabispay.*         → backend paiement dédié
 tabisride.*        → backend mobilité dédié
@@ -30,33 +33,48 @@ tabisride.*        → backend mobilité dédié
 
 Chaque produit garde son infrastructure indépendante. Ce repo ne contient que le frontend vitrine.
 
-> Pour un formulaire de contact plus tard : API route Vercel serverless, Resend/Formspree, ou lien `mailto:` (déjà en place).
+> Pour un formulaire de contact plus tard : route API servie par le Worker, Resend/Formspree, ou lien `mailto:` (déjà en place).
 
 ## Développement local
 
 ```bash
 npm install
-npm run dev
+npm run dev        # http://localhost:3000
+npm run preview    # aperçu dans le runtime Cloudflare (workerd)
 ```
 
-Ouvrir [http://localhost:3000](http://localhost:3000).
+## Déploiement Cloudflare Workers
 
-## Déploiement Vercel
+Le site est déployé sur le Worker **`tabisdev`** (https://tabisdev.isidoretabati.workers.dev).
+Configuration : `wrangler.jsonc` + `open-next.config.ts`.
 
-1. Importer ce repo GitHub sur [vercel.com/new](https://vercel.com/new)
-2. Framework : **Next.js** (détecté automatiquement)
-3. Build : `npm run build` — Output : défaut Next.js
-4. Ajouter le domaine `tabisdev.com` dans **Settings → Domains**
-5. Configurer les DNS chez votre registrar (enregistrements fournis par Vercel)
+### Automatique (recommandé)
 
-Aucune variable d'environnement requise pour l'instant.
+Chaque `git push` sur `main` lance `.github/workflows/deploy.yml`, qui construit le site avec OpenNext et le déploie.
+Secrets GitHub requis (**Settings → Secrets and variables → Actions**) :
+
+| Secret | Où le trouver |
+|--------|---------------|
+| `CLOUDFLARE_API_TOKEN` | Cloudflare → My Profile → API Tokens → modèle « Edit Cloudflare Workers » |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare → Workers & Pages → colonne de droite « Account ID » |
+
+### Manuel
+
+```bash
+npx wrangler login   # une seule fois
+npm run deploy
+```
+
+### Domaine personnalisé
+
+Cloudflare → Workers & Pages → `tabisdev` → **Settings → Domains & Routes → Add → Custom domain** → `tabisdev.com` (le domaine doit être une zone de votre compte Cloudflare).
 
 ## Éditer le contenu du site
 
 Tout le texte (email, titres, produits, liens…) est dans **`content/site.json`**.
 
 - **Interface web** : [EDITING.md](./EDITING.md) — `/admin` avec Decap CMS
-- **Rapide** : modifier `content/site.json` sur GitHub → Vercel redéploie automatiquement
+- **Rapide** : modifier `content/site.json` sur GitHub → le workflow redéploie automatiquement
 
 ```bash
 npm run dev   # site
